@@ -1,6 +1,14 @@
 <?php
 
+//$get_action = isset($_GET["action"]) ? $_GET["action"] : "liste";
+//$get_id = isset($_GET["id"]) ? $_GET["id"] : 0;
+
+
+//echo 'hello from lieux.php<br/>';
+
 $result = [];
+
+
 
 $lieux = [
     "belgique" => [
@@ -46,9 +54,15 @@ $lieux = [
     ],
 ];
 
+
+
+
+
 if (isset($_GET["pays"])) {
     $pays = $_GET["pays"];
+    
     if (isset($_GET["regions"])) {
+        
         $regions = $_GET["regions"];
         if (isset($_GET["communes"])) {
             $communes = $_GET["communes"];
@@ -61,9 +75,16 @@ if (isset($_GET["pays"])) {
     } else {
         // Cas où on retourne les régions
         $result = ["regions" => array_keys($lieux[$pays])];
+        //$result = ["regions" => $lieux[$pays]];
+        
     }
-}
-else{
+    
+    
+} else {
+    // Cas où on retourne les pays uniquement
     $result = ["pays" => array_keys($lieux)];
 }
+
+
+
 echo json_encode($result);
